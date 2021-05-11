@@ -10,6 +10,10 @@ db = SQLAlchemy()
 # last_name
 # image_url (profile images)
 
+def connect_db(app):
+    db.app = app
+    db.init_app(app)
+
 class User(db.Model):
     '''User'''
 
