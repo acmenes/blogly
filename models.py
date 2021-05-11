@@ -2,6 +2,8 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
+
 # user
 # id [PK] (autoincrementing)
 # first_name
