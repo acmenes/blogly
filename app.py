@@ -34,15 +34,38 @@ def add_user():
 
     return render_template('newuser.html')
 
+# USER ROUTES 
+
+@app.route('/users/<int:user_id>')
+def user_profile(user_id):
+    return 'user profile'
+
 @app.route('/users/<int:user_id>/edit')
 def edit_user():
     return 'edit user'
-
 
 @app.route('/users/<int:user_id>/delete')
 def delete_user():
     return 'delete user'
 
-@app.route('/users/<int:user_id>')
-def user_profile(user_id):
-    return 'user profile'
+@app.route('/users/<int:user_id>/posts')
+def user_posts(user_id):
+    return 'user posts'
+
+@app.route('/users/<int:user_id>/posts/new', methods=["POST"])
+def user_new_post():
+    return 'make new post'
+
+# POSTING ROUTES
+
+@app.route('posts<int:post_id>')
+def show_posts():
+    return 'posts'
+
+@app.route('posts<int:post_id>/edit')
+def edit_post():
+    return 'edit this post' 
+
+@app.route('posts<int:post_id>/delete')
+def delete_post():
+    return 'delete this post' 
