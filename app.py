@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'MissMillieIsGood'
 
 connect_db(app)
-# db.create_all()
+db.create_all()
 
 @app.route('/')
 def point_users():
@@ -42,7 +42,7 @@ def add_user():
 
 @app.route('/users/<int:user_id>')
 def user_profile(user_id):
-    return 'user profile'
+    return render_template('userprofile.html')
 
 @app.route('/users/<int:user_id>/edit')
 def edit_user():
