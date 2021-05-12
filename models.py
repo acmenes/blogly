@@ -32,3 +32,17 @@ class User(db.Model):
                     nullable=False)
 
     # I could make nullable = True in case some people don't have an img
+
+    posts = db.relationship('Post')
+
+    class Post(db.Model):
+        '''Post'''
+
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, 
+                    primary_key=True, 
+                    autoincrement=True)
+    title = db.Column(db.String(100), 
+                    nullable=False, 
+                    unique=False)
