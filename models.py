@@ -35,23 +35,23 @@ class User(db.Model):
 
     def __repr__(self):
         u = self
-        return f"<Employee {u.id} {u.first_name} {u.last_name}>"
+        return f"<Users {u.id} {u.first_name} {u.last_name}>"
 
-class Post(db.Model):
-    '''Post'''
+# class Post(db.Model):
+#     '''Post'''
 
-    __tablename__ = "posts"
+#     __tablename__ = "posts"
 
-    id = db.Column(db.Integer, 
-                    primary_key=True, 
-                    autoincrement=True)
-    title = db.Column(db.String(100), 
-                    nullable=False, 
-                    unique=False)
+#     id = db.Column(db.Integer, 
+#                     primary_key=True, 
+#                     autoincrement=True)
+#     title = db.Column(db.String(100), 
+#                     nullable=False, 
+#                     unique=False)
 
-    def __repr__(self):
-        p = self
-        return f"<Employee {p.id} {p.title}>"
+#     def __repr__(self):
+#         p = self
+#         return f"<Employee {p.id} {p.title}>"
 
 # copying this logic from the videos, might need to use something like this?
 
