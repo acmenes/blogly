@@ -20,7 +20,9 @@ def point_users():
 
 @app.route('/users')
 def user_directory():
-    return render_template('users.html')
+    '''Shows all the users'''
+    users = User.query.all()
+    return render_template('users.html', users=users)
 
 @app.route('/users/new', methods=["GET"])
 def user_form():
@@ -28,6 +30,7 @@ def user_form():
 
 @app.route('/users/new', methods=["POST"])
 def add_user():
+    '''Adds a new user to the db'''
     new_user= User(
     first_name = request.form['first_name'],
     last_name = request.form['last_name'],
