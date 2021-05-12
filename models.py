@@ -10,9 +10,7 @@ db = SQLAlchemy()
 # last_name
 # image_url (profile images)
 
-def connect_db(app):
-    db.app = app
-    db.init_app(app)
+#### CLASSES ####
 
 class User(db.Model):
     '''User'''
@@ -35,6 +33,10 @@ class User(db.Model):
 
     # posts = db.relationship('Post')
 
+    def __repr__(self):
+        u = self
+        return f"<Employee {u.id} {u.first_name} {u.last_name}>"
+
 class Post(db.Model):
     '''Post'''
 
@@ -46,3 +48,36 @@ class Post(db.Model):
     title = db.Column(db.String(100), 
                     nullable=False, 
                     unique=False)
+
+    def __repr__(self):
+        p = self
+        return f"<Employee {p.id} {p.title}>"
+
+# copying this logic from the videos, might need to use something like this?
+
+# def get_user_posts():
+#     all_user_posts = Posts.query.all()
+
+#     for post in user_posts:
+
+# class PostTag(db.Model):
+
+# class Tag(db.Model):
+
+def connect_db(app):
+    '''Connect the db to our app'''
+
+    db.app = app
+    db.init_app(app)
+    
+if __name__ == "__main__":
+    # As a convenience, if we run this module interactively, it will leave
+    # you in a state of being able to work with the database directly.
+
+    # So that we can use Flask-SQLAlchemy, we'll make a Flask app
+    from app import app
+    connect_db(app)
+
+    db.drop_all()
+    db.create_all()
+    example_data()
