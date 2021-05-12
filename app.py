@@ -22,18 +22,21 @@ def point_users():
 def user_directory():
     return render_template('users.html')
 
+@app.route('/users/new', methods=["GET"])
+def user_form():
+    return render_template('newuser.html')
+
 @app.route('/users/new', methods=["POST"])
 def add_user():
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    img_url = request.form['img_url']
+    new_user= User(
+    first_name = request.form['first_name'],
+    last_name = request.form['last_name'],
+    img_url = request.form['img_url'] or None)
 
-    user = User(first_name=first_name, last_name=last_name, img_url=img_url)
-
-    db.session.add(user)
+    db.session.add(new_user)
     db.session.commit()
 
-    return render_template('newuser.html')
+    return redirect('/users')
 
 # USER ROUTES 
 
