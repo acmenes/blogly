@@ -2,8 +2,19 @@
 
 {% block content %}
 
-<h1>{{ user.first_name }} {{ user.last_name }} </h1>
+<h1>USERNAME {{ user.first_name }} {{ user.last_name }} </h1>
+
+{{ user.id }}
 
 <h2>Posts:</h2>
+<ul>
+    <!-- {% for post in posts %}
+    <li></li>
+    {% endfor %} -->
+</ul>
+
+<form action="">
+    <button>Create New Post</button>
+</form>
 
 {% endblock %}
