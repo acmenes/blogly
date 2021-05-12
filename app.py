@@ -45,7 +45,8 @@ def add_user():
 
 @app.route('/users/<int:user_id>')
 def user_profile(user_id):
-    return render_template('userprofile.html')
+    user = User.query.all()
+    return render_template('userprofile.html', user=user)
 
 @app.route('/users/<int:user_id>/edit')
 def edit_user():
