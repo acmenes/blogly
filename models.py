@@ -33,10 +33,10 @@ class User(db.Model):
 
     # I could make nullable = True in case some people don't have an img
 
-    posts = db.relationship('Post')
+    # posts = db.relationship('Post')
 
-    class Post(db.Model):
-        '''Post'''
+class Post(db.Model):
+    '''Post'''
 
     __tablename__ = "posts"
 
