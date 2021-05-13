@@ -45,20 +45,26 @@ def add_user():
 
 @app.route('/users/<int:user_id>')
 def user_profile(user_id):
+    '''Display the user profile'''
+    idnum = user_id - 1
     user = User.query.all()
-    return render_template('userprofile.html', user=user)
+    return render_template('userprofile.html', user=user[idnum])
 
 @app.route('/users/<int:user_id>/edit')
 def edit_user(user_id):
-    user = User.query.all()
-    return render_template('edituserprofile.html', user=user)
+    '''Edit the user's profile'''
+    idnum = user_id - 1
+    user = User.query.get_or_404(user_id)
+    return render_template('edituserprofile.html', user=user[idnum])
 
 @app.route('/users/<int:user_id>/delete')
 def delete_user():
+    idnum = user_id - 1
     return 'delete user'
 
 @app.route('/users/<int:user_id>/posts')
 def user_posts(user_id):
+    idnum = user_id - 1
     return 'user posts'
 
 @app.route('/users/<int:user_id>/posts/new', methods=["POST"])

@@ -2,9 +2,10 @@
 
 {% block content %}
 
-<h1>USERNAME {{ user.first_name }} {{ user.last_name }} </h1>
+<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+<!-- <h2> {{ user.full_name  }}</h2> -->
 
-{{ user.id }}
+<img src="{{ user.img_url }}">
 
 <h2>Posts:</h2>
 <ul>
@@ -19,6 +20,10 @@
 
 <form action="">
     <button>Create New Post</button>
+</form>
+
+<form action="/users/{{user.id}}/delete">
+    <button>Delete Your Profile</button>
 </form>
 
 {% endblock %}

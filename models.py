@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+DEFAULT_IMAGE_URL = "https://www.freeiconspng.com/uploads/icon-user-blue-symbol-people-person-generic--public-domain--21.png"
+
 # user
 # id [PK] (autoincrementing)
 # first_name
@@ -27,15 +29,12 @@ class User(db.Model):
                     nullable=False,
                     unique=False)
     img_url = db.Column(db.String(1000), 
-                    nullable=False)
-
-    # I could make nullable = True in case some people don't have an img
+                    nullable=False, default=DEFAULT_IMAGE_URL)
 
     # posts = db.relationship('Post')
-
-    def __repr__(self):
-        u = self
-        return f"<Users {u.id} {u.first_name} {u.last_name}>"
+    # @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}>"
 
 # class Post(db.Model):
 #     '''Post'''
