@@ -1,5 +1,5 @@
 """Models for Blogly."""
-
+import datetime
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -36,21 +36,31 @@ class User(db.Model):
     def full_name(self):
         return f"{self.first_name} {self.last_name}>"
 
-# class Post(db.Model):
-#     '''Post'''
+class Post(db.Model):
+    '''Post'''
 
-#     __tablename__ = "posts"
+    __tablename__ = "posts"
 
-#     id = db.Column(db.Integer, 
-#                     primary_key=True, 
-#                     autoincrement=True)
-#     title = db.Column(db.String(100), 
-#                     nullable=False, 
-#                     unique=False)
+    id = db.Column(db.Integer, 
+                    primary_key=True, 
+                    autoincrement=True)
+    title = db.Column(db.String(100), 
+                    nullable=False, 
+                    unique=False)
+    content = db.Column(db.String, 
+                    nullable=False)
+    created_at = db.Column(db.DateTime, 
+                    nullable=False, 
+                    default=datetime.datetime.now)
+    user_id = db.Column(db.Integer, 
+                    db.ForeignKey('users.id'), 
+                    nullable=False)
 
-#     def __repr__(self):
-#         p = self
-#         return f"<Employee {p.id} {p.title}>"
+    def __repr__(self):
+        p = self
+        return f"<Employee {p.id} {p.title}>"
+
+# do I need to add a user id to each post too? user_id_post = db.Column(db.Integer, db.ForeignKey('users'))
 
 # copying this logic from the videos, might need to use something like this?
 
