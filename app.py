@@ -16,7 +16,7 @@ db.create_all()
 
 @app.route('/')
 def point_users():
-    return redirect('/users')
+    return render_template('home.html')
 
 @app.route('/users')
 def user_directory():
@@ -73,23 +73,39 @@ def user_new_post():
 
 # POSTING ROUTES
 
-@app.route('/users/<int:user_id>/posts/new')
+@app.route('/users/<int:user_id>/posts/new', methods=["GET"])
 def new_post(user_id):
+    user = User.query.get_or_404(user_id)
     idnum = user_id - 1
     user = User.query.get_or_404(user_id)
-    return render_template('createpost.html')
+    return render_template('createpost.html', user=user)
 
-# @app.route('posts<int:post_id>')
-# def show_posts():
-#     return 'posts'
+@app.route('/users/<int:user_id>/posts/new', methods=["POST"])
+def create_post(user_id):
+    '''Adds a user post to the db'''
+    user = User.query.get_or_404(user_id)
+    new_post=Post(
+        title=request.form['title'],
+        content=request.form['content'],
+        user=user)
+    db.session.add(new_post)
+    db.session.commit()
 
-# @app.route('posts<int:post_id>/edit')
-# def edit_post():
-#     return 'edit this post' 
+    return redirect('/users/<int:user_id>', user=user)
 
-# @app.route('posts<int:post_id>/delete')
-# def delete_post():
-#     return 'delete this post' 
+@app.route('/posts<int:post_id>')
+def show_posts():
+    return render_template('post.html')
+
+@app.route('/posts<int:post_id>/edit')
+def edit_post():
+    post = Post.query.get_or_404(post_id)
+    return 'edit this post' 
+
+@app.route('/posts<int:post_id>/delete')
+def delete_post():
+    post = Post.query.get_or_404(post_id)
+    return 'delete this post' 
 
 
 #### OTHER NOTES
