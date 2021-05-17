@@ -31,7 +31,7 @@ class User(db.Model):
     img_url = db.Column(db.String(1000), 
                     nullable=False, default=DEFAULT_IMAGE_URL)
 
-    # posts = db.relationship('Post')
+    posts = db.relationship('Post', backref='user')
     # @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}>"
@@ -47,7 +47,7 @@ class Post(db.Model):
     title = db.Column(db.String(100), 
                     nullable=False, 
                     unique=False)
-    content = db.Column(db.String, 
+    content = db.Column(db.String(10000), 
                     nullable=False)
     created_at = db.Column(db.DateTime, 
                     nullable=False, 
@@ -58,7 +58,7 @@ class Post(db.Model):
 
     def __repr__(self):
         p = self
-        return f"<Employee {p.id} {p.title}>"
+        return f"<post {p.id} {p.title}>"
 
 # do I need to add a user id to each post too? user_id_post = db.Column(db.Integer, db.ForeignKey('users'))
 

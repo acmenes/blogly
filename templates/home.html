@@ -6,6 +6,18 @@
 
 <a href="/users">Check out our list of users</a>
 
+<h2>Newest Users:</h2>
+
+<!-- {{new_users}} -->
+
 <h2>Latest Posts:</h2>
+
+<ul>
+    {% for post in new_posts %}
+    <li><a href="/posts/{{post.id}}">{{ post.title}}</a></li>
+    {% endfor %}
+</ul>
+
+<!-- {{ new_posts }} -->
 
 {% endblock %}

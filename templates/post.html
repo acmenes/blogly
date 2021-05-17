@@ -2,9 +2,11 @@
 
 {% block content %}
 
-<h1>Post Title</h1>
+<h1>{{ post.title }}</h1>
 
-<p>Body of the Post</p>
+<br><br>
+
+<p>{{ post.content }}</p>
 
 <!-- <form action='/posts{{post.id}}/edit'> -->
     <button>Edit This Post</button>
