@@ -62,19 +62,41 @@ def user_profile(user_id):
     return render_template('userprofile.html', user=user[idnum])
 
 @app.route('/users/<int:user_id>/edit')
+def user_edit(user_id):
+    '''Link to edit page'''
+    user = User.query.get_or_404(user_id)
+    return render_template('edituserprofile.html', user=user)
+
+@app.route('/users/<int:user_id>/edit', methods=["POST"])
 def edit_user(user_id):
     '''Edit the user's profile'''
+
+    #messes up the order of the users
+
     idnum = user_id - 1
     user = User.query.get_or_404(user_id)
-    # user.first_name=request.form['first_name']
-    # user.last_name=request.form['last_name']
-    # user.img_url=['img_url']
-    return render_template('edituserprofile.html', user=user[idnum])
+    user.first_name = request.form['first_name']
+    user.last_name = request.form['last_name']
+    user.img_url = ['img_url']
 
-@app.route('/users/<int:user_id>/delete')
-def delete_user():
-    idnum = user_id - 1
-    return 'delete user'
+    db.session.add(user)
+    db.session.commit()
+
+    return redirect('/users')
+
+# @app.route('/users/<int:user_id>/delete')
+# def delete_user():
+#     idnum = user_id - 1
+#     return 'delete user'
+
+@app.route('/users/<int:user_id>/delete', methods=["POST"])
+def remove_user(user_id):
+    user = User.query.get_or_404(user_id)
+
+    db.session.delete(user)
+    db.session.commit
+
+    return redirect('/users')
 
 @app.route('/users/<int:user_id>/posts')
 def user_posts(user_id):
