@@ -14,10 +14,20 @@ app.config['SECRET_KEY'] = 'MissMillieIsGood'
 connect_db(app)
 db.create_all()
 
+# MAIN ROUTES
+
 @app.route('/')
 def point_users():
+    '''home page'''
     new_posts= Post.query.order_by(Post.created_at.desc()).limit(5).all()
     return render_template('home.html', new_posts=new_posts)
+
+@app.route('/notfound')
+def not_found(e):
+    '''SHOW 404'''
+    return render_template('404.html'), 404
+
+# USER ROUTES
 
 @app.route('/users')
 def user_directory():
@@ -42,7 +52,7 @@ def add_user():
 
     return redirect('/users')
 
-# USER ROUTES 
+# USER EDIT ROUTES 
 
 @app.route('/users/<int:user_id>')
 def user_profile(user_id):

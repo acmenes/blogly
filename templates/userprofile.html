@@ -9,8 +9,9 @@
 
 <h2>Posts:</h2>
 <ul>
-    {% for post in posts %}
-    <li><p>A post</p></li>
+    {% for post in user.posts %}
+    <li><p>{{ post.title }}</p></li>
+    <span>{{ post.content }}</span>
     {% endfor %}
 </ul>
 
