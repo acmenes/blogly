@@ -1,6 +1,6 @@
 """Seed file to make sample data for db."""
 
-from models import User, Post, db
+from models import User, Post, db, Tag
 from app import app
 
 # Create all tables
@@ -25,4 +25,14 @@ post2 = Post(id= 2, title="Why Do Kids Love The Taste of Cinnamon Toast Crunch",
 post3 = Post(id=3, title="What About CatCoin?", content="Now there's a cryptocurrency to go wtih every cat meme you have seen on the internet!", user_id=2)
 
 db.session.add_all([post1, post2, post3])
+db.session.commit()
+
+# Create sample tags
+
+cats = Tag(name="cats")
+memes = Tag(name="memes")
+guitars = Tag(name="guitars")
+pokemon = Tag(name="pokemon")
+
+db.session.add_all([cats, memes, guitars, pokemon])
 db.session.commit()

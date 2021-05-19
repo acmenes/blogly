@@ -18,6 +18,14 @@
     {% endfor %}
 </ul>
 
+<h2>Popular Tags</h2>
+
+<ul>
+    {% for tag in tags %}
+    <li>{{ tag.name }}</li>
+    {% endfor %}
+</ul>
+
 <!-- {{ new_posts }} -->
 
 {% endblock %}

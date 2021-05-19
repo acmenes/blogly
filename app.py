@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, redirect, request, render_template
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -20,7 +20,8 @@ db.create_all()
 def point_users():
     '''home page'''
     new_posts= Post.query.order_by(Post.created_at.desc()).limit(5).all()
-    return render_template('home.html', new_posts=new_posts)
+    tags = Tag.query.all()
+    return render_template('home.html', new_posts=new_posts, tags=tags)
 
 @app.route('/notfound')
 def not_found(e):
