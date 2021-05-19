@@ -154,7 +154,7 @@ def show_tags():
     tags = Tag.query.all()
     return render_template('tags.html', tags=tags)
 
-@app.route('/tags/new')
+@app.route('/tags/new', methods=["POST"])
 def create_tag():
     '''Create a new tag'''
     new_tag = Tag(
@@ -163,8 +163,9 @@ def create_tag():
 
     db.session.add(new_tag)
     db.session.commit
-    
+
     return redirect('/tags')
+
 
 #### OTHER NOTES
 
