@@ -147,6 +147,24 @@ def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     return 'delete this post' 
 
+# TAGS
+
+@app.route('/tags')
+def show_tags():
+    tags = Tag.query.all()
+    return render_template('tags.html', tags=tags)
+
+@app.route('/tags/new')
+def create_tag():
+    '''Create a new tag'''
+    new_tag = Tag(
+        name = request.form["name"]
+    )
+
+    db.session.add(new_tag)
+    db.session.commit
+    
+    return redirect('/tags')
 
 #### OTHER NOTES
 
