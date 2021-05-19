@@ -42,8 +42,7 @@ class Post(db.Model):
     __tablename__ = "posts"
 
     id = db.Column(db.Integer, 
-                    primary_key=True, 
-                    autoincrement=True)
+                    primary_key=True)
     title = db.Column(db.String(100), 
                     nullable=False, 
                     unique=False)
@@ -59,6 +58,30 @@ class Post(db.Model):
     def __repr__(self):
         p = self
         return f"<post {p.id} {p.title}>"
+
+class Tag(db.Model):
+    '''Tags'''
+
+    __tablename__ = "tags"
+
+    id = db.Column(db.Integer, 
+                    primary_key=True)
+    name = db.Column(db.String(15), 
+                    nullable=False, 
+                    unique=True)
+
+# class PostTag(db.Model):
+#     '''Tag for Posts'''
+
+#     __tablename__ = "posttags"
+
+#     post_id = db.Column(db.Integer, 
+#                     db.ForeignKey('post.id'), 
+#                     nullable=False)
+#     tag_id = db.Column(db.Integer, 
+#                     db.ForeignKey('tag.id'), 
+#                     nullable=False)
+
 
 # do I need to add a user id to each post too? user_id_post = db.Column(db.Integer, db.ForeignKey('users'))
 

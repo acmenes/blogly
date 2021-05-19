@@ -89,12 +89,13 @@ def edit_user(user_id):
 #     idnum = user_id - 1
 #     return 'delete user'
 
-@app.route('/users/<int:user_id>/delete', methods=["POST"])
-def remove_user(user_id):
+@app.route('/users/<int:user_id>/delete', methods=["POST", "GET"])
+def users_destroy(user_id):
     user = User.query.get_or_404(user_id)
 
     db.session.delete(user)
-    db.session.commit
+    db.session.commit()
+    # flash(f"user {user.full_name} deleted.")
 
     return redirect('/users')
 

@@ -12,8 +12,10 @@ db.create_all()
 user1 = User(first_name="Some", last_name="Guy", img_url="https://picsum.photos/100/100")
 user2 = User(first_name="Cat", last_name="Lady", img_url="https://picsum.photos/100/100")
 user3 = User(first_name="Millie", last_name="The Cat", img_url="https://picsum.photos/100/100")
+user4 = User(first_name="Hairdresser", last_name="Octopus", img_url="https://picsum.photos/100/100")
+user5 = User(first_name="delet", last_name="me pls", img_url="https://picsum.photos/100/100")
 
-db.session.add_all([user1, user2, user3])
+db.session.add_all([user1, user2, user3, user4, user5])
 db.session.commit()
 
 # Create sample posts
