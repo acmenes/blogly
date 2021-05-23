@@ -3,18 +3,26 @@
 {% block content %}
 
 <h1>{{ post.title }}</h1>
-
 <br><br>
 
-<p>{{ post.content }}</p>
+<div class="container">
+    <p>{{ post.content }}</p>
+<br>
+<p>Tags:</p>
+    <div class="row">
+        <form action='/posts/{{post.id}}/add_tags'>
+            <button type="submit" class="btn btn-info">Add Tags!</button>
+        </form>
 
-<!-- <form action='/posts{{post.id}}/edit'> -->
-    <button>Edit This Post</button>
-<!-- </form> -->
+        <form action='/posts/{{post.id}}/edit'>
+            <button type="submit" class="btn btn-primary">Edit This Post</button>
+        </form>
 
-<!-- <form action='/posts{{post.id}}/delete'> -->
-    <button>Delete This Post</button>
-<!-- </form> -->
+        <form action='/posts/{{post.id}}/delete'>
+            <button type="submit" class="btn btn-danger">Delete This Post</button>
+        </form>
+    </div>
+</div>
 
 
 {% endblock %}

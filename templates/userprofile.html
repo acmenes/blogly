@@ -10,23 +10,28 @@
 <h2>Posts:</h2>
 <ul>
     {% for post in user.posts %}
-    <li><p>{{ post.title }}</p></li>
-    <span>{{ post.content }}</span>
+    <a href="/posts/{{ post.id }}">{{ post.title }}</a>
+    <br>
+    <!-- <span>{{ post.content }}</span> -->
     {% endfor %}
 </ul>
 
 <form action="/users/{{user.id}}/posts/new">
-    <button>Create A New Post</button>
+    <button type="submit" class="btn btn-success">Create A New Post</button>
 </form>
 
 <h2>Your Profile</h2>
 
-<form action="/users/{{user.id}}/edit">
-    <button>Edit Your Profile</button>
-</form>
+<div class="container">
+    <div class="row">
+        <form action="/users/{{user.id}}/edit">
+            <button type="submit" class="btn btn-primary">Edit Your Profile</button>
+        </form>
 
-<form action="/users/{{user.id}}/delete">
-    <button>Delete Your Profile</button>
-</form>
+        <form action="/users/{{user.id}}/delete">
+            <button type="submit" class="btn btn-danger">Delete Your Profile</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

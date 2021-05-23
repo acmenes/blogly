@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Submit a New Tag</h1>
+
+<form method="POST">
+    <label for="name">Name:</label><br>
+        <input type="text" id="tag_name" name="tag_name" placeholder="Tag Name"><br><br>
+    <input type="submit" value="Submit">
+    <button>Cancel</button>
+</form>
+
+{% endblock %}

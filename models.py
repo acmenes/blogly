@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-DEFAULT_IMAGE_URL = "https://www.freeiconspng.com/uploads/icon-user-blue-symbol-people-person-generic--public-domain--21.png"
+DEFAULT_IMAGE_URL = "https://picsum.photos/100/100"
 
 # user
 # id [PK] (autoincrementing)
@@ -31,7 +31,8 @@ class User(db.Model):
     img_url = db.Column(db.String(1000), 
                     nullable=False, default=DEFAULT_IMAGE_URL)
 
-    posts = db.relationship('Post', backref='user')
+    posts = db.relationship('Post', backref='user', cascade='all, delete-orphan')
+
     # @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}>"
@@ -42,7 +43,8 @@ class Post(db.Model):
     __tablename__ = "posts"
 
     id = db.Column(db.Integer, 
-                    primary_key=True)
+                    primary_key=True, 
+                    autoincrement=True)
     title = db.Column(db.String(100), 
                     nullable=False, 
                     unique=False)
@@ -70,31 +72,22 @@ class Tag(db.Model):
                     nullable=False, 
                     unique=True)
 
-# class PostTag(db.Model):
-#     '''Tag for Posts'''
+    posts = db.relationship('Post', 
+                            secondary='posts_tags', 
+                            cascade="all, delete", 
+                            backref="tags")
 
-#     __tablename__ = "posttags"
+class PostTag(db.Model):
+    '''Tag that is added to posts'''
 
-#     post_id = db.Column(db.Integer, 
-#                     db.ForeignKey('post.id'), 
-#                     nullable=False)
-#     tag_id = db.Column(db.Integer, 
-#                     db.ForeignKey('tag.id'), 
-#                     nullable=False)
+    __tablename__ = "posts_tags"
 
-
-# do I need to add a user id to each post too? user_id_post = db.Column(db.Integer, db.ForeignKey('users'))
-
-# copying this logic from the videos, might need to use something like this?
-
-# def get_user_posts():
-#     all_user_posts = Posts.query.all()
-
-#     for post in user_posts:
-
-# class PostTag(db.Model):
-
-# class Tag(db.Model):
+    post_id = db.Column(db.Integer, 
+                        db.ForeignKey('posts.id'), 
+                        primary_key=True)
+    tag_id = db.Column(db.Integer, 
+                        db.ForeignKey('tags.id'), 
+                        primary_key=True)
 
 def connect_db(app):
     '''Connect the db to our app'''
@@ -102,14 +95,15 @@ def connect_db(app):
     db.app = app
     db.init_app(app)
     
-if __name__ == "__main__":
-    # As a convenience, if we run this module interactively, it will leave
-    # you in a state of being able to work with the database directly.
+# if __name__ == "__main__":
+#     # As a convenience, if we run this module interactively, it will leave
+#     # you in a state of being able to work with the database directly.
 
-    # So that we can use Flask-SQLAlchemy, we'll make a Flask app
-    from app import app
-    connect_db(app)
+#     # So that we can use Flask-SQLAlchemy, we'll make a Flask app
 
-    db.drop_all()
-    db.create_all()
-    example_data()
+#     from app import app
+#     connect_db(app)
+
+#     db.drop_all()
+#     db.create_all()
+#     example_data()
