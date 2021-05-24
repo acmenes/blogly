@@ -8,5 +8,19 @@
 <p>{{ tag.name }}</p>
 {% endfor %} -->
 
-<button>Submit</button>
+<div class="form">
+    <form method="POST">
+        <div class="form-check">
+            <label for="tags">Add Tags:</label>
+            <br>
+                {% for tag in tag %}
+                    <input type="checkbox" class="form-check-input">
+                    <label class="form-check-label">{{ tag.name }}</label>
+                    <br>
+                {% endfor %}
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
 {% endblock %}

@@ -4,11 +4,17 @@
 
 <h1>Posts Containing {{ tag.name }}</h1>
 
-<ul>
-    <!-- {% for tag in tags %}
-        <l1></l1>
-    {% endfor %} -->
-</ul>
+<div class="container">
+    <div class="row">
+        <ul class="list-group list-group-flush">
+            {% for post in tag.posts %}
+                <l1 class="list-group-item">
+                    <a href="/posts/{{ post.id }}">{{ post.title }}</a>
+                </l1>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 
 <form action="/tags/{{tag.id}}/edit">
     <button>Edit This Tag</button>

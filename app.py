@@ -1,6 +1,5 @@
 """Blogly application."""
 
-import re
 from flask import Flask, redirect, request, render_template
 from models import db, connect_db, User, Post, Tag
 from flask_debugtoolbar import DebugToolbarExtension
@@ -20,9 +19,9 @@ db.create_all()
 @app.route('/')
 def point_users():
     '''home page'''
-    new_posts= Post.query.order_by(Post.created_at.desc()).limit(5).all()
+    new_posts= Post.query.order_by(Post.created_at.desc()).limit(7).all()
     new_users= User.query.order_by(User.first_name.desc()).limit(5).all()
-    tags = Tag.query.all()
+    tags = Tag.query.limit(7).all()
     return render_template('home.html', new_posts=new_posts, tags=tags, new_users=new_users)
 
 @app.route('/notfound')
@@ -112,16 +111,22 @@ def user_posts(user_id):
 @app.route('/users/<int:user_id>/posts/new', methods=["GET"])
 def new_post(user_id):
     user = User.query.get_or_404(user_id)
-    return render_template('createpost.html', user=user)
+    tag = Tag.query.all()
+    return render_template('createpost.html', user=user, tag=tag)
 
 @app.route('/users/<int:user_id>/posts/new', methods=["POST"])
 def create_post(user_id):
     '''Adds a user post to the db'''
     user = User.query.get_or_404(user_id)
 
+    tag_ids = [int(num) for num in request.form.getlist("tags")]
+
+    tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+
     post = Post(title=request.form['title'],
                     content=request.form['content'],
-                    user=user)
+                    user=user, 
+                    tags=tags)
 
     db.session.add(post)
     db.session.commit()
@@ -135,7 +140,7 @@ def show_posts(post_id):
     # user = Post.ForeignKey(User)
 
     # post_tags = PostTags.query.all(post_id, tag_id)
-    
+
     return render_template('post.html', post=post)
 
 @app.route('/posts/<int:post_id>/edit')
@@ -187,7 +192,8 @@ def create_tag():
 def one_tag(tag_id):
     '''Display list of posts containing each tag'''
     tag = Tag.query.get_or_404(tag_id)
-    return render_template('tagpage.html', tag=tag)
+    post = Post.query.all()
+    return render_template('tagpage.html', tag=tag, post=post)
 
 @app.route('/tags/<int:tag_id>/edit')
 def update_tag(tag_id):
@@ -217,6 +223,19 @@ def add_tag_to_post(post_id):
 
     post = Post.query.get_or_404(post_id)
 
-    # tag = Tag.query.all(tag_id)
+    tag = Tag.query.all()
 
-    return render_template('selecttags.html', post=post)
+    return render_template('selecttags.html', post=post, tag=tag)
+
+@app.route('/posts/<int:post_id>/add_tags', methods=["POST"])
+def tag_post(post_id):
+
+    post = Post.query.get_or_404(post_id)
+
+    tag_ids = [int(num) for num in request.form.getlist("tags")]
+    post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+
+    db.session.add(post)
+    db.session.commit()
+
+    return redirect (f"/posts/{post.id}")

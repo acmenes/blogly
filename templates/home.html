@@ -11,7 +11,7 @@
         <div class="col-sm bg-dark text-white mr-md-2">
             <h3>Check Out Posts By Some Of Our Users!</h3>
                 <ul>
-                    {% for user in new_users%}
+                    {% for user in new_users %}
                     <li><a href="/users/{{user.id}}">{{ user.first_name }} {{ user.last_name }}</a></li>
                     {% endfor %}
                 </ul>
