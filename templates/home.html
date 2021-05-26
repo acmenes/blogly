@@ -24,7 +24,7 @@
                 <p class="card-text">
                     {% for post in new_posts %}
                     <li><a href="/posts/{{post.id}}">{{ post.title}}</a></li>
-                    {% endfor %}
+                    {% endfor %}</p>
                 <a href="/" class="btn btn-primary">Read More Posts</a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <p class="card-text">
                     {% for tag in tags %}
                     <li><a href="/tags/{{tag.id}}">{{ tag.name }}</a></li>
-                    {% endfor %}
+                    {% endfor %}</p>
                 <a href="/tags" class="btn btn-primary">Check Out Our tags</a>
                 </div>
             </div>
