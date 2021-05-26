@@ -1,36 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class = "container">
-    <div class= "row">
-        <div class="col-sm bg-dark text-white mr-md-2">
-            <h3>Check Out Posts By Some Of Our Users!</h3>
-                <ul>
-                    {% for user in new_users %}
-                    <li><a href="/users/{{user.id}}">{{ user.first_name }} {{ user.last_name }}</a></li>
-                    {% endfor %}
-                </ul>
-                <a href="/users">Check out our list of users</a>
+<div class="container">
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://picsum.photos/100/100" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">Check Out Our Authors!</h5>
+            <p class="card-text">
+                {% for user in new_users %}
+                <li><a href="/users/{{user.id}}">{{ user.first_name }} {{ user.last_name }}</a></li>
+                {% endfor %}</p>
+            <a href="/users" class="btn btn-primary">See All Our Authors</a>
+            </div>
         </div>
-        <div class="col-sm bg-dark text-white mr-md-2">
-            <h3>Latest Posts:</h3>
-                <ul>
-                    {% for post in new_posts %}
-                    <li><a href="/posts/{{post.id}}">{{ post.title}}</a></li>
-                    {% endfor %}
-                </ul>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://picsum.photos/100/100" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">Latest Posts</h5>
+            <p class="card-text">
+                {% for post in new_posts %}
+                <li><a href="/posts/{{post.id}}">{{ post.title}}</a></li>
+                {% endfor %}
+            <a href="/users" class="btn btn-primary">Read More Posts</a>
+            </div>
         </div>
-        <div class="col-sm bg-dark text-white mr-md-2">
-            <h3>Popular Tags</h3>
-                <ul>
-                    {% for tag in tags %}
-                    <li><a href="/tags/{{tag.id}}">{{ tag.name }}</a></li>
-                    {% endfor %}
-                </ul>
-                <a href="/tags">Browse all our tags</a>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://picsum.photos/100/100" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title">Popular Tags</h5>
+            <p class="card-text">
+                {% for tag in tags %}
+                <li><a href="/tags/{{tag.id}}">{{ tag.name }}</a></li>
+                {% endfor %}
+            <a href="/users" class="btn btn-primary">Check Out Our tags</a>
+            </div>
         </div>
     </div>
+    </div>
 </div>
-
 
 {% endblock %}

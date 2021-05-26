@@ -9,13 +9,21 @@
     <title>Blogly</title>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">Blogly</a>
-        <div class="collapse navbar-collapse">
+        <!-- <div class="navbar"> -->
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/users">Users</a>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="/users">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="/posts">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="/tags">Tags</a>
+                </li>
             </div>
-        </div>
+        <!-- </div> -->
     </nav>
     <br><br>
     {% block content %} {% endblock %}
