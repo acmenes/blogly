@@ -19,9 +19,9 @@ db.create_all()
 @app.route('/')
 def point_users():
     '''home page'''
-    new_posts= Post.query.order_by(Post.created_at.desc()).limit(7).all()
+    new_posts= Post.query.order_by(Post.created_at.desc()).limit(5).all()
     new_users= User.query.order_by(User.first_name.desc()).limit(5).all()
-    tags = Tag.query.limit(7).all()
+    tags = Tag.query.limit(5).all()
     return render_template('home.html', new_posts=new_posts, tags=tags, new_users=new_users)
 
 @app.route('/notfound')
