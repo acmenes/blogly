@@ -131,7 +131,7 @@ def create_post(user_id):
     db.session.add(post)
     db.session.commit()
 
-    return redirect('/')
+    return redirect(f'/users/{user_id}')
 
 @app.route('/posts/<int:post_id>')
 def show_posts(post_id):

@@ -14,9 +14,11 @@
             <label for="tags">Add Tags:</label>
             <br>
                 {% for tag in tag %}
-                    <input type="checkbox" class="form-check-input">
-                    <label class="form-check-label">{{ tag.name }}</label>
-                    <br>
+                <input type="checkbox" class="form-check-input"
+                value="{{ tag.id }}" id="tag_{{ tag.id }}"
+                name="tags">
+                <label class="form-check-label">{{ tag.name }}</label>
+                <br>
                 {% endfor %}
         </div>
         <input type="submit" value="Submit">
