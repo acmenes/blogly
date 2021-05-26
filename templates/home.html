@@ -25,7 +25,7 @@
                     {% for post in new_posts %}
                     <li><a href="/posts/{{post.id}}">{{ post.title}}</a></li>
                     {% endfor %}
-                <a href="/users" class="btn btn-primary">Read More Posts</a>
+                <a href="/" class="btn btn-primary">Read More Posts</a>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                     {% for tag in tags %}
                     <li><a href="/tags/{{tag.id}}">{{ tag.name }}</a></li>
                     {% endfor %}
-                <a href="/users" class="btn btn-primary">Check Out Our tags</a>
+                <a href="/tags" class="btn btn-primary">Check Out Our tags</a>
                 </div>
             </div>
         </div>
