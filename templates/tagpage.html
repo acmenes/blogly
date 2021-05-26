@@ -9,7 +9,7 @@
         <ul class="list-group list-group-flush">
             {% for post in tag.posts %}
                 <l1 class="list-group-item">
-                    <a href="/posts/{{ post.id }}">{{ post.title }}</a>
+                    <a href="/posts/{{ post.id }}">{{ post.title }} by {{ post.user.first_name }} {{ post.user.last_name }}</a>
                 </l1>
             {% endfor %}
         </ul>
