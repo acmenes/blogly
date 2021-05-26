@@ -10,18 +10,20 @@
         <div class="col-sm">
             <img src="{{ user.img_url }}">
         </div>
-        <div class="col-sm bg-dark text-white mr-md-2">
-            <h2>Posts:</h2>
-                <ul>
-                    {% for post in user.posts %}
-                    <a href="/posts/{{ post.id }}">{{ post.title }}</a>
-                    <br>
-                    <!-- <span>{{ post.content }}</span> -->
-                    {% endfor %}
-                </ul>
+        <div class="col-sm mr-md-2">
+            <div class="card" style="width: 18rem;">
+                <h5 class="card-title">Posts by {{ user.first_name }} {{ user.last_name }}</h5>
+                    <ul class="list-group list-group-flush">
+                        {% for post in user.posts %}
+                            <li class="list-group-item"><a href="/posts/{{ post.id }}">{{ post.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+              </div>
         </div>
     </div>
 </div>
+
+
 
 <form action="/users/{{user.id}}/posts/new">
     <button type="submit" class="btn btn-success">Create A New Post</button>
