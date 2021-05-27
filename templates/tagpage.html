@@ -2,18 +2,23 @@
 
 {% block content %}
 
-<h1>Posts Containing {{ tag.name }}</h1>
-
-<div class="container">
-    <div class="row">
-        <ul class="list-group list-group-flush">
-            {% for post in tag.posts %}
-                <l1 class="list-group-item">
-                    <a href="/posts/{{ post.id }}">{{ post.title }} by {{ post.user.first_name }} {{ post.user.last_name }}</a>
-                </l1>
-            {% endfor %}
-        </ul>
-    </div>
+<div class="container-fluid">
+    <h1>Posts Containing {{ tag.name }}</h1>
+        <div class="row" id="css-row">
+            <!-- <ul class="list-group list-group-flush"> -->
+                {% for post in tag.posts %}
+                <div class="card" style="width: 18rem;">
+                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                    <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <h6><i>by {{ post.user.first_name }} {{ post.user.last_name }}</i></h6>
+                    <p class="card-text">{{ post.content }}</p>
+                    <a href="/posts/{{post.id}}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+                {% endfor %}
+            <!-- </ul> -->
+        </div>
 </div>
 
 <form action="/tags/{{tag.id}}/edit">

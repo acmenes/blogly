@@ -72,6 +72,8 @@ class Tag(db.Model):
                     nullable=False, 
                     unique=True)
 
+    # deleting tags shouldn't cascade to posts only post tags
+    
     posts = db.relationship('Post', 
                             secondary='posts_tags', 
                             cascade="all, delete", 

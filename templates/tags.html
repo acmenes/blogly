@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container-fluid">
+    <h1>Browse Our Tags</h1>
 
-<h1>Browse Our Tags</h1>
+    <ul>
+        {% for tag in tags %}
+        <li><a href="/tags/{{tag.id}}">{{ tag.name }}</a></li>
+        {% endfor %}
+    </ul>
 
-<ul>
-    {% for tag in tags %}
-    <li><a href="/tags/{{tag.id}}">{{ tag.name }}</a></li>
-    {% endfor %}
-</ul>
-
-<form action="/tags/new">
-    <button>Add A New Tag!</button>
-</form>
-
-
+    <form action="/tags/new">
+        <button>Add A New Tag!</button>
+    </form>
+</div>
 {% endblock %}

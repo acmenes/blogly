@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div class="container-fluid">
     <h1>List of Bloggers</h1>
     <ul>
         {% for user in users %}
@@ -11,5 +11,6 @@
     <form action="/users/new">
         <button type="submit" class="btn btn-success">Join Blogly!</button>
     </form> 
+</div>
 
 {% endblock %}

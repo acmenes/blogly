@@ -108,6 +108,12 @@ def user_posts(user_id):
 
 # POSTING ROUTES
 
+@app.route('/posts')
+def show_all_posts():
+    posts = Post.query.all()
+    tags = Tag.query.all()
+    return render_template('posts.html', posts=posts, tags=tags)
+
 @app.route('/users/<int:user_id>/posts/new', methods=["GET"])
 def new_post(user_id):
     user = User.query.get_or_404(user_id)
@@ -143,8 +149,21 @@ def show_posts(post_id):
 
     return render_template('post.html', post=post)
 
-@app.route('/posts/<int:post_id>/edit')
+@app.route('/posts/<int:post_id>/edit', methods=["GET"])
 def edit_post(post_id):
+
+    post = Post.query.get_or_404(post_id)
+
+    # post.title = request.form['title']
+    # post.content = request.form['content']
+
+    # db.session.add(post)
+    # db.session.commit()
+
+    return render_template('/editpost.html', post=post)
+
+@app.route('/posts/<int:post_id>/edit', methods=["POST"])
+def change_post(post_id):
 
     post = Post.query.get_or_404(post_id)
 
@@ -154,7 +173,7 @@ def edit_post(post_id):
     db.session.add(post)
     db.session.commit()
 
-    return render_template('/editpost.html', post=post)
+    return redirect('/')
 
 @app.route('/posts/<int:post_id>/delete')
 def delete_post(post_id):
@@ -204,6 +223,8 @@ def update_tag(tag_id):
 @app.route('/tags/<int:tag_id>/edit', methods=["POST"])
 def edit_tag(tag_id):
     tag = Tag.query.get_or_404(tag_id)
+
+    # tag.name = request.form["tag_name"] if request.form["name"] else tag.name
 
     db.session.add(tag)
     db.session.commit()
